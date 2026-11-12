@@ -1,0 +1,25 @@
+{
+  "seed": 1729,
+  "dt_seconds": 0.02,
+  "samples": 600,
+  "calibration_samples": 300,
+  "true_R": 1.2,
+  "true_C": 1.5,
+  "observation_noise_sd_mmHg": 1,
+  "baseline_R": 1,
+  "baseline_C": 1,
+  "resistance_grid": [
+    0.8,
+    1,
+    1.2,
+    1.4,
+    1.6
+  ],
+  "compliance_grid": [
+    1,
+    1.25,
+    1.5,
+    1.75,
+    2
+  ]
+}

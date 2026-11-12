@@ -1,0 +1,47 @@
+{
+  "config": {
+    "baseline_C": 1,
+    "baseline_R": 1,
+    "calibration_samples": 300,
+    "compliance_grid": [
+      1,
+      1.25,
+      1.5,
+      1.75,
+      2
+    ],
+    "dt_seconds": 0.02,
+    "observation_noise_sd_mmHg": 1,
+    "resistance_grid": [
+      0.8,
+      1,
+      1.2,
+      1.4,
+      1.6
+    ],
+    "samples": 600,
+    "seed": 1729,
+    "true_C": 1.5,
+    "true_R": 1.2
+  },
+  "config_sha256": "60a70da9389908a741b4d1a01ac3f271789f0b00b16af9f77b920eb54ae970a1",
+  "data_kind": "synthetic",
+  "data_sha256": "feb825484e8333ef0084a82738ed0927200d18b3220ac21b1a8c8eef31cef97a",
+  "metrics": {
+    "baseline_holdout_rmse_mmHg": 16.117107991225073,
+    "calibration_rmse_mmHg": 1.0474004766192089,
+    "estimated_C": 1.5,
+    "estimated_R": 1.2,
+    "holdout_rmse_vs_observed_mmHg": 0.9798338973871292,
+    "holdout_rmse_vs_synthetic_truth_mmHg": 0.0,
+    "interpretation": "Synthetic parameter recovery within the same generating model; no patient-specific or clinical validation.",
+    "sensitivity": {
+      "R_multiplier_0.8": 19.074083575700307,
+      "R_multiplier_1": 0.0,
+      "R_multiplier_1.2": 18.711469414905494
+    }
+  },
+  "project": "Biomedical-Digital-Twin",
+  "schema_version": 1,
+  "source_sha256": "7b0ef130a60dfca5387371e462b84410da2f898f7590ccd3a5725a522bbcc2da"
+}

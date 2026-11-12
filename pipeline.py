@@ -27,14 +27,26 @@ def mean(xs):
     return statistics.mean(xs)
 
 def simulate(resistance, compliance, inflow, dt, initial=80):
-    if resistance <= 0 or compliance <= 0 or dt <= 0:
-        raise ValueError('R, C and dt must be positive')
+    if any(not math.isfinite(x) or x <= 0 for x in (resistance, compliance, dt)):
+        raise ValueError('R, C and dt must be finite and positive')
+    if not math.isfinite(initial):
+        raise ValueError('initial pressure must be finite')
+    time_constant = resistance * compliance
+    if not math.isfinite(time_constant) or time_constant <= 0:
+        raise ValueError('R*C must be representable as a finite positive time constant')
     # Exact piecewise-constant solution of C dP/dt = Q - P/R.
-    decay = math.exp(-dt/(resistance*compliance))
+    exponent = -dt / time_constant
+    decay = math.exp(exponent)
+    # expm1 retains the inflow contribution when exp(exponent) rounds to 1.
+    inflow_gain = -math.expm1(exponent)
     pressure = initial
     values = []
     for flow in inflow:
-        pressure = pressure*decay + resistance*flow*(1-decay)
+        if not math.isfinite(flow):
+            raise ValueError('inflow samples must be finite')
+        pressure = pressure*decay + resistance*flow*inflow_gain
+        if not math.isfinite(pressure):
+            raise ValueError('pressure overflowed; use representable inputs')
         values.append(pressure)
     return values
 

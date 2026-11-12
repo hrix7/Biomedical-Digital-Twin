@@ -38,6 +38,14 @@ Validation has read-only repository permissions and never retains checkout crede
 
 Each successful run uploads its verified report/data artifact for 30 days and displays the report in the run summary. Identical results produce no empty commits. A daily rerun verifies reproducibility; it does not invent research progress or autonomously modify algorithms. Notifications and branch protections are controlled in GitHub settings. Public repositories may need schedule reactivation after inactivity.
 
+## Numerical and evaluation safeguards
+
+The piecewise-constant exact solution uses -expm1(-dt/(R*C)) for the inflow weight, preserving tiny nonzero contributions that 1-exp(...) can round to zero. Model parameters and initial pressure/inflow must be finite; R, C and dt must be positive, and R*C must be representable. Signed finite inflows remain supported.
+
+## Development history
+
+See [completed improvements and validation](DEVELOPMENT_LOG.md) and the [ordered development backlog](DEVELOPMENT_BACKLOG.md).
+
 ## Roadmap
 
 Add independently sourced, license-reviewed public data, stronger baselines and uncertainty estimates before any real-data claims. Keep synthetic and public-data results visibly separate. Clinical deployment is outside this project's scope.

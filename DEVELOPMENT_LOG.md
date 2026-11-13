@@ -16,3 +16,11 @@ Validation before publication (Python 3.11.0, macOS):
 Metrics were regenerated, not edited by hand. Source hashes and artifact checksums were refreshed. Linux may differ from macOS in final floating-point bits; CI generates and verifies results within its own runtime. Synthetic data only; no clinical validation is claimed.
 
 Hosted results are available on this repository's [Actions page](https://github.com/hrix7/Biomedical-Digital-Twin/actions). This entry records local checks, not a claim that an as-yet-unobserved hosted run succeeded.
+
+## 2026-11-13
+
+Ranked calibration loss grid, runner-up gap and boundary flags.
+
+Exports all calibration-only R/C losses with a runner-up loss gap and flags indicating whether the best grid value is on an edge. These are finite-grid diagnostics, not confidence regions or a proof of identifiable parameters. A constant equilibrium test demonstrates that different compliances can be indistinguishable up to floating-point roundoff. Holdout data never select grid parameters.
+
+Validation: full unittest suite, pipeline regeneration and byte-for-byte verifier, diff review; GitHub validation outcome is tracked after push. No workflow/permission changes.

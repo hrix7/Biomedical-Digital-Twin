@@ -53,3 +53,7 @@ Add independently sourced, license-reviewed public data, stronger baselines and 
 ## License
 
 MIT; see [LICENSE](LICENSE).
+
+## 2026-11-13 benchmark extension
+
+Exports all calibration-only R/C losses with a runner-up loss gap and flags indicating whether the best grid value is on an edge. These are finite-grid diagnostics, not confidence regions or a proof of identifiable parameters. A constant equilibrium test demonstrates that different compliances can be indistinguishable up to floating-point roundoff. Holdout data never select grid parameters.

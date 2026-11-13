@@ -55,10 +55,13 @@ def rmse(a,b):
         raise ValueError('equal nonempty vectors required')
     return math.sqrt(mean([(x-y)**2 for x,y in zip(a,b)]))
 
-def calibrate(inflow, observed, config):
+def calibration_grid(inflow, observed, config):
     candidates = [(rmse(simulate(r,c,inflow,config['dt_seconds']),observed),r,c)
                   for r in config['resistance_grid'] for c in config['compliance_grid']]
-    return min(candidates)
+    return sorted(candidates)
+
+def calibrate(inflow, observed, config):
+    return calibration_grid(inflow,observed,config)[0]
 
 def run(config):
     rng = random.Random(config['seed'])
@@ -67,7 +70,8 @@ def run(config):
     clean = simulate(config['true_R'],config['true_C'],inflow,dt)
     observed = [p+rng.gauss(0,config['observation_noise_sd_mmHg']) for p in clean]
     cut = config['calibration_samples']
-    loss,r,c = calibrate(inflow[:cut],observed[:cut],config)
+    grid=calibration_grid(inflow[:cut],observed[:cut],config)
+    loss,r,c = grid[0]
     predicted = simulate(r,c,inflow,dt)
     baseline = simulate(config['baseline_R'],config['baseline_C'],inflow,dt)
     sensitivity = {f'R_multiplier_{m}':rmse(simulate(r*m,c,inflow,dt)[cut:],clean[cut:]) for m in (.8,1,1.2)}
@@ -79,6 +83,10 @@ def run(config):
                       holdout_rmse_vs_synthetic_truth_mmHg=rmse(predicted[cut:],clean[cut:]),
                       baseline_holdout_rmse_mmHg=rmse(baseline[cut:],clean[cut:]),
                       sensitivity=sensitivity,
+                      calibration_grid=[dict(rmse_mmHg=e,R=rr,C=cc) for e,rr,cc in grid],
+                      calibration_runner_up_gap_mmHg=grid[1][0]-loss if len(grid)>1 else None,
+                      calibration_best_on_grid_boundary=dict(R=r in (min(config['resistance_grid']),max(config['resistance_grid'])),C=c in (min(config['compliance_grid']),max(config['compliance_grid']))) ,
+                      grid_interpretation='Calibration-only loss surface, not a confidence region or proof of identifiability; holdout values do not select parameters.',
                       interpretation='Synthetic parameter recovery within the same generating model; no patient-specific or clinical validation.')
 
 def experiment():

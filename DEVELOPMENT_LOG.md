@@ -24,3 +24,11 @@ Ranked calibration loss grid, runner-up gap and boundary flags.
 Exports all calibration-only R/C losses with a runner-up loss gap and flags indicating whether the best grid value is on an edge. These are finite-grid diagnostics, not confidence regions or a proof of identifiable parameters. A constant equilibrium test demonstrates that different compliances can be indistinguishable up to floating-point roundoff. Holdout data never select grid parameters.
 
 Validation: full unittest suite, pipeline regeneration and byte-for-byte verifier, diff review; GitHub validation outcome is tracked after push. No workflow/permission changes.
+
+## 2026-11-14
+
+Finite calibration-loss contract and overflow-safe RMSE.
+
+Rejects nonfinite or incomplete calibration observations before grid ranking and empty parameter grids before selection. RMSE scales finite differences before squaring so large representable errors do not overflow; unrepresentable differences fail explicitly. Existing calibration and holdout protocol remains unchanged.
+
+Validation before publication: full unittest suite, regenerated pipeline artifacts, byte-for-byte verification and diff review. Workflow configuration/permissions unchanged; existing policy tests pass. Hosted CI is followed after the tested source is published.

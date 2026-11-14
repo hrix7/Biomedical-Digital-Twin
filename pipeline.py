@@ -53,9 +53,19 @@ def simulate(resistance, compliance, inflow, dt, initial=80):
 def rmse(a,b):
     if len(a) != len(b) or not a:
         raise ValueError('equal nonempty vectors required')
-    return math.sqrt(mean([(x-y)**2 for x,y in zip(a,b)]))
+    if any(not math.isfinite(v) for v in list(a)+list(b)):
+        raise ValueError('loss vectors must be finite')
+    errors=[abs(x-y) for x,y in zip(a,b)]
+    if any(not math.isfinite(v) for v in errors):
+        raise ValueError('loss differences must be representable')
+    scale=max(errors)
+    return scale*math.sqrt(mean([(v/scale)**2 for v in errors])) if scale else 0.0
 
 def calibration_grid(inflow, observed, config):
+    if not inflow or len(inflow)!=len(observed) or any(not math.isfinite(v) for v in list(inflow)+list(observed)):
+        raise ValueError('finite equal nonempty calibration vectors required')
+    if not config['resistance_grid'] or not config['compliance_grid']:
+        raise ValueError('nonempty parameter grids required')
     candidates = [(rmse(simulate(r,c,inflow,config['dt_seconds']),observed),r,c)
                   for r in config['resistance_grid'] for c in config['compliance_grid']]
     return sorted(candidates)

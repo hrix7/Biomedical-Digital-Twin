@@ -57,3 +57,7 @@ MIT; see [LICENSE](LICENSE).
 ## 2026-11-13 benchmark extension
 
 Exports all calibration-only R/C losses with a runner-up loss gap and flags indicating whether the best grid value is on an edge. These are finite-grid diagnostics, not confidence regions or a proof of identifiable parameters. A constant equilibrium test demonstrates that different compliances can be indistinguishable up to floating-point roundoff. Holdout data never select grid parameters.
+
+## 2026-11-14 extension
+
+Rejects nonfinite or incomplete calibration observations before grid ranking and empty parameter grids before selection. RMSE scales finite differences before squaring so large representable errors do not overflow; unrepresentable differences fail explicitly. Existing calibration and holdout protocol remains unchanged.

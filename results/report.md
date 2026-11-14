@@ -70,7 +70,7 @@ Generated from `config.json` by `pipeline.py`. Metrics are computed, never hand-
     {
       "C": 1.25,
       "R": 1,
-      "rmse_mmHg": 12.516803665856276
+      "rmse_mmHg": 12.516803665856278
     },
     {
       "C": 1.25,
@@ -80,7 +80,7 @@ Generated from `config.json` by `pipeline.py`. Metrics are computed, never hand-
     {
       "C": 1,
       "R": 1,
-      "rmse_mmHg": 12.889979747224093
+      "rmse_mmHg": 12.889979747224091
     },
     {
       "C": 1,
@@ -105,12 +105,12 @@ Generated from `config.json` by `pipeline.py`. Metrics are computed, never hand-
     {
       "C": 1.25,
       "R": 1.6,
-      "rmse_mmHg": 23.612128540345257
+      "rmse_mmHg": 23.612128540345253
     },
     {
       "C": 2,
       "R": 0.8,
-      "rmse_mmHg": 25.121561453096515
+      "rmse_mmHg": 25.12156145309652
     },
     {
       "C": 1.75,
@@ -120,12 +120,12 @@ Generated from `config.json` by `pipeline.py`. Metrics are computed, never hand-
     {
       "C": 1.5,
       "R": 0.8,
-      "rmse_mmHg": 26.084351731530308
+      "rmse_mmHg": 26.08435173153031
     },
     {
       "C": 1,
       "R": 1.6,
-      "rmse_mmHg": 26.178137083428645
+      "rmse_mmHg": 26.17813708342865
     },
     {
       "C": 1.25,
@@ -143,7 +143,7 @@ Generated from `config.json` by `pipeline.py`. Metrics are computed, never hand-
   "estimated_C": 1.5,
   "estimated_R": 1.2,
   "grid_interpretation": "Calibration-only loss surface, not a confidence region or proof of identifiability; holdout values do not select parameters.",
-  "holdout_rmse_vs_observed_mmHg": 0.9798338973871292,
+  "holdout_rmse_vs_observed_mmHg": 0.9798338973871291,
   "holdout_rmse_vs_synthetic_truth_mmHg": 0.0,
   "interpretation": "Synthetic parameter recovery within the same generating model; no patient-specific or clinical validation.",
   "sensitivity": {
@@ -154,4 +154,4 @@ Generated from `config.json` by `pipeline.py`. Metrics are computed, never hand-
 }
 ```
 
-Result SHA-256: `485940255b0c5d617d7000991962252c3bdf8c3f4a6045044299a34167c7a315`
+Result SHA-256: `c341e9a72c95dd09e7a6cc1671b6feccfb561eae9df407c2fcabbc8ee0676c12`

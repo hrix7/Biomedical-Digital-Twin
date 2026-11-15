@@ -150,8 +150,9 @@ Generated from `config.json` by `pipeline.py`. Metrics are computed, never hand-
     "R_multiplier_0.8": 19.074083575699877,
     "R_multiplier_1": 0.0,
     "R_multiplier_1.2": 18.711469414905515
-  }
+  },
+  "time_convention": "time_seconds labels post-step pressure at (i+1)*dt; each flow value applies on [flow_interval_start_seconds, time_seconds). Initial pressure at t=0 is not an exported observation."
 }
 ```
 
-Result SHA-256: `c341e9a72c95dd09e7a6cc1671b6feccfb561eae9df407c2fcabbc8ee0676c12`
+Result SHA-256: `5b546584aec974c674b6cd4ada05032e20d1e484478f91e60850acdc63c2fe3c`

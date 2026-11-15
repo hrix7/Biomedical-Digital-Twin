@@ -12,6 +12,10 @@ Ranked calibration grid, runner-up gap and boundary diagnostics.
 
 Finite calibration-loss contract and overflow-safe RMSE.
 
+## Completed — 2026-11-15
+
+Correct post-step observation timestamps and expose flow intervals.
+
 ## Next priorities
 
 1. Add richer forcing functions with independently checked integration.

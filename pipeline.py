@@ -85,10 +85,10 @@ def run(config):
     predicted = simulate(r,c,inflow,dt)
     baseline = simulate(config['baseline_R'],config['baseline_C'],inflow,dt)
     sensitivity = {f'R_multiplier_{m}':rmse(simulate(r*m,c,inflow,dt)[cut:],clean[cut:]) for m in (.8,1,1.2)}
-    rows = [['sample','time_seconds','flow_mL_per_second','clean_mmHg','observed_mmHg','estimated_mmHg']]
-    rows.extend([i,format(i*dt,'.12g'),format(q,'.12g'),format(p,'.12g'),format(o,'.12g'),format(e,'.12g')]
+    rows = [['sample','time_seconds','flow_mL_per_second','clean_mmHg','observed_mmHg','estimated_mmHg','flow_interval_start_seconds']]
+    rows.extend([i,format((i+1)*dt,'.12g'),format(q,'.12g'),format(p,'.12g'),format(o,'.12g'),format(e,'.12g'),format(i*dt,'.12g')]
                 for i,(q,p,o,e) in enumerate(zip(inflow,clean,observed,predicted)))
-    return rows, dict(estimated_R=r,estimated_C=c,calibration_rmse_mmHg=loss,
+    return rows, dict(time_convention='time_seconds labels post-step pressure at (i+1)*dt; each flow value applies on [flow_interval_start_seconds, time_seconds). Initial pressure at t=0 is not an exported observation.',estimated_R=r,estimated_C=c,calibration_rmse_mmHg=loss,
                       holdout_rmse_vs_observed_mmHg=rmse(predicted[cut:],observed[cut:]),
                       holdout_rmse_vs_synthetic_truth_mmHg=rmse(predicted[cut:],clean[cut:]),
                       baseline_holdout_rmse_mmHg=rmse(baseline[cut:],clean[cut:]),

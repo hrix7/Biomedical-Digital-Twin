@@ -61,3 +61,7 @@ Exports all calibration-only R/C losses with a runner-up loss gap and flags indi
 ## 2026-11-14 extension
 
 Rejects nonfinite or incomplete calibration observations before grid ranking and empty parameter grids before selection. RMSE scales finite differences before squaring so large representable errors do not overflow; unrepresentable differences fail explicitly. Existing calibration and holdout protocol remains unchanged.
+
+## 2026-11-15 correctness extension
+
+The exact simulator returns pressure after each integration step. time_seconds now correctly labels (i+1)*dt rather than i*dt; flow_interval_start_seconds identifies the start of the preceding piecewise-constant-flow interval. Initial pressure at t=0 is not an exported observation. Pressure values, model parameters and calibration/holdout membership are unchanged; this fixes a one-step time-label error, not a performance gain.

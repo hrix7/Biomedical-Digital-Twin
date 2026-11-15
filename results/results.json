@@ -26,7 +26,7 @@
   },
   "config_sha256": "60a70da9389908a741b4d1a01ac3f271789f0b00b16af9f77b920eb54ae970a1",
   "data_kind": "synthetic",
-  "data_sha256": "82589d3d3bf7848af94f088606f63fd98d37788053dd7333a0fa78afbf128de7",
+  "data_sha256": "ae1d8389a35485c4befa8926262f580aa95b4b4db7a981723eae7942e9eecb0d",
   "metrics": {
     "baseline_holdout_rmse_mmHg": 16.11710799122507,
     "calibration_best_on_grid_boundary": {
@@ -172,9 +172,10 @@
       "R_multiplier_0.8": 19.074083575699877,
       "R_multiplier_1": 0.0,
       "R_multiplier_1.2": 18.711469414905515
-    }
+    },
+    "time_convention": "time_seconds labels post-step pressure at (i+1)*dt; each flow value applies on [flow_interval_start_seconds, time_seconds). Initial pressure at t=0 is not an exported observation."
   },
   "project": "Biomedical-Digital-Twin",
   "schema_version": 1,
-  "source_sha256": "8da679d567837c4f74c620fc7c37d408486a044bc773b0f1d4f047a52360ba9a"
+  "source_sha256": "4a68cc6f6399569000f9da1a30e973f97229b39b96ab6317e8bc558bda479330"
 }

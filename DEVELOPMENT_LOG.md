@@ -32,3 +32,11 @@ Finite calibration-loss contract and overflow-safe RMSE.
 Rejects nonfinite or incomplete calibration observations before grid ranking and empty parameter grids before selection. RMSE scales finite differences before squaring so large representable errors do not overflow; unrepresentable differences fail explicitly. Existing calibration and holdout protocol remains unchanged.
 
 Validation before publication: full unittest suite, regenerated pipeline artifacts, byte-for-byte verification and diff review. Workflow configuration/permissions unchanged; existing policy tests pass. Hosted CI is followed after the tested source is published.
+
+## 2026-11-15
+
+Correct post-step observation timestamps and expose flow intervals.
+
+The exact simulator returns pressure after each integration step. time_seconds now correctly labels (i+1)*dt rather than i*dt; flow_interval_start_seconds identifies the start of the preceding piecewise-constant-flow interval. Initial pressure at t=0 is not an exported observation. Pressure values, model parameters and calibration/holdout membership are unchanged; this fixes a one-step time-label error, not a performance gain.
+
+Validation before publication: full unittest suite, pipeline regeneration/byte verifier, diff review and existing workflow-policy tests. Workflows and permissions unchanged. Hosted validation is followed after publication.

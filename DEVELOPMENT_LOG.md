@@ -40,3 +40,7 @@ Correct post-step observation timestamps and expose flow intervals.
 The exact simulator returns pressure after each integration step. time_seconds now correctly labels (i+1)*dt rather than i*dt; flow_interval_start_seconds identifies the start of the preceding piecewise-constant-flow interval. Initial pressure at t=0 is not an exported observation. Pressure values, model parameters and calibration/holdout membership are unchanged; this fixes a one-step time-label error, not a performance gain.
 
 Validation before publication: full unittest suite, pipeline regeneration/byte verifier, diff review and existing workflow-policy tests. Workflows and permissions unchanged. Hosted validation is followed after publication.
+
+## 2026-11-17 — Independent forcing-step probe
+
+Completed the retained, unpublished implementation from November 16. Added a zero-to-constant inflow probe and an independently evaluated two-phase closed form. Every post-step pressure is exported with its analytic reference; tests cover the phase boundary, endpoint, invalid phase sizes and unrepresentable duration. This same-model numerical check is not physiological validation. Full unit tests, pipeline regeneration and artifact verification run before publication; no workflow or permission changes.

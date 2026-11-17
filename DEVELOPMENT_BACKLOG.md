@@ -16,8 +16,12 @@ Finite calibration-loss contract and overflow-safe RMSE.
 
 Correct post-step observation timestamps and expose flow intervals.
 
+## Completed — 2026-11-17
+
+Independent forcing-step probe.
+
 ## Next priorities
 
-1. Add richer forcing functions with independently checked integration.
-2. Quantify uncertainty without interpreting the finite loss grid as a confidence region.
-3. Evaluate model mismatch separately from same-model parameter recovery.
+1. Quantify uncertainty without interpreting the finite loss grid as a confidence region.
+2. Evaluate model mismatch separately from same-model parameter recovery.
+3. Add independent convergence checks for smoothly varying forcing.

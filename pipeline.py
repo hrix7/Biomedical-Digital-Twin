@@ -73,6 +73,17 @@ def calibration_grid(inflow, observed, config):
 def calibrate(inflow, observed, config):
     return calibration_grid(inflow,observed,config)[0]
 
+def forcing_step_probe(resistance,compliance,dt,phase_samples=50):
+    if type(phase_samples) is not int or phase_samples<1:
+        raise ValueError('positive integer phase_samples required')
+    if not math.isfinite(dt) or dt<=0 or not math.isfinite(2*phase_samples*dt):
+        raise ValueError('finite positive representable probe duration required')
+    inflow=[0]*phase_samples+[100]*phase_samples
+    predicted=simulate(resistance,compliance,inflow,dt)
+    tau=resistance*compliance;split=phase_samples*dt;middle=80*math.exp(-split/tau)
+    reference=[80*math.exp(-(i+1)*dt/tau) if i<phase_samples else 100*resistance+(middle-100*resistance)*math.exp(-((i+1)*dt-split)/tau) for i in range(2*phase_samples)]
+    return dict(initial_pressure_mmHg=80,flow_before_mL_s=0,flow_after_mL_s=100,switch_time_seconds=split,phase_samples=phase_samples,max_abs_error_mmHg=max(abs(a-b) for a,b in zip(predicted,reference)),samples=[dict(time_seconds=(i+1)*dt,flow_mL_s=q,pressure_mmHg=p,closed_form_mmHg=r) for i,(q,p,r) in enumerate(zip(inflow,predicted,reference))],interpretation='Separate deterministic zero-to-constant-flow probe with an independent two-phase closed form; same ideal model, not physiological or patient validation.')
+
 def run(config):
     rng = random.Random(config['seed'])
     dt = config['dt_seconds']
@@ -88,7 +99,7 @@ def run(config):
     rows = [['sample','time_seconds','flow_mL_per_second','clean_mmHg','observed_mmHg','estimated_mmHg','flow_interval_start_seconds']]
     rows.extend([i,format((i+1)*dt,'.12g'),format(q,'.12g'),format(p,'.12g'),format(o,'.12g'),format(e,'.12g'),format(i*dt,'.12g')]
                 for i,(q,p,o,e) in enumerate(zip(inflow,clean,observed,predicted)))
-    return rows, dict(time_convention='time_seconds labels post-step pressure at (i+1)*dt; each flow value applies on [flow_interval_start_seconds, time_seconds). Initial pressure at t=0 is not an exported observation.',estimated_R=r,estimated_C=c,calibration_rmse_mmHg=loss,
+    return rows, dict(forcing_step_probe=forcing_step_probe(config['true_R'],config['true_C'],dt),time_convention='time_seconds labels post-step pressure at (i+1)*dt; each flow value applies on [flow_interval_start_seconds, time_seconds). Initial pressure at t=0 is not an exported observation.',estimated_R=r,estimated_C=c,calibration_rmse_mmHg=loss,
                       holdout_rmse_vs_observed_mmHg=rmse(predicted[cut:],observed[cut:]),
                       holdout_rmse_vs_synthetic_truth_mmHg=rmse(predicted[cut:],clean[cut:]),
                       baseline_holdout_rmse_mmHg=rmse(baseline[cut:],clean[cut:]),

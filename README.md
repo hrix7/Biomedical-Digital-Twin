@@ -65,3 +65,7 @@ Rejects nonfinite or incomplete calibration observations before grid ranking and
 ## 2026-11-15 correctness extension
 
 The exact simulator returns pressure after each integration step. time_seconds now correctly labels (i+1)*dt rather than i*dt; flow_interval_start_seconds identifies the start of the preceding piecewise-constant-flow interval. Initial pressure at t=0 is not an exported observation. Pressure values, model parameters and calibration/holdout membership are unchanged; this fixes a one-step time-label error, not a performance gain.
+
+## Independent forcing-step probe
+
+Added a zero-to-constant inflow probe and an independently evaluated two-phase closed form. Every post-step pressure is exported with its analytic reference; tests cover the phase boundary, endpoint, invalid phase sizes and unrepresentable duration. This same-model numerical check is not physiological validation.

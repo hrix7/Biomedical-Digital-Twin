@@ -44,3 +44,7 @@ Validation before publication: full unittest suite, pipeline regeneration/byte v
 ## 2026-11-17 — Independent forcing-step probe
 
 Completed the retained, unpublished implementation from November 16. Added a zero-to-constant inflow probe and an independently evaluated two-phase closed form. Every post-step pressure is exported with its analytic reference; tests cover the phase boundary, endpoint, invalid phase sizes and unrepresentable duration. This same-model numerical check is not physiological validation. Full unit tests, pipeline regeneration and artifact verification run before publication; no workflow or permission changes.
+
+## 2026-11-18 — Avoid intermediate flow-product overflow and underflow
+
+The exact update now evaluates R*Q*gain with exponent-scaled multiplication. Valid finite contributions survive intermediate overflow or underflow; truly unrepresentable outputs still fail. Independent extreme-magnitude tests cover both paths, signed/zero products and invalid factors. The idealized model and inference scope are unchanged. Full suite: 24 tests passed; pipeline generation, independent --verify and diff checks passed before publication. No workflow/permission changes; workflow policy tests passed.

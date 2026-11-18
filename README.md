@@ -69,3 +69,7 @@ The exact simulator returns pressure after each integration step. time_seconds n
 ## Independent forcing-step probe
 
 Added a zero-to-constant inflow probe and an independently evaluated two-phase closed form. Every post-step pressure is exported with its analytic reference; tests cover the phase boundary, endpoint, invalid phase sizes and unrepresentable duration. This same-model numerical check is not physiological validation.
+
+## Avoid intermediate flow-product overflow and underflow
+
+The exact update now evaluates R*Q*gain with exponent-scaled multiplication. Valid finite contributions survive intermediate overflow or underflow; truly unrepresentable outputs still fail. Independent extreme-magnitude tests cover both paths, signed/zero products and invalid factors. The idealized model and inference scope are unchanged.

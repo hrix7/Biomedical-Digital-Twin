@@ -20,8 +20,12 @@ Correct post-step observation timestamps and expose flow intervals.
 
 Independent forcing-step probe.
 
+## Completed — 2026-11-18
+
+Avoid intermediate flow-product overflow and underflow.
+
 ## Next priorities
 
-1. Quantify uncertainty without interpreting the finite loss grid as a confidence region.
-2. Evaluate model mismatch separately from same-model parameter recovery.
-3. Add independent convergence checks for smoothly varying forcing.
+1. Quantify uncertainty without treating the finite grid as a confidence region.
+2. Evaluate model mismatch separately from same-model recovery.
+3. Add convergence checks for smoothly varying forcing.

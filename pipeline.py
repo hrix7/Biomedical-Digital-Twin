@@ -26,6 +26,17 @@ def table(rows):
 def mean(xs):
     return statistics.mean(xs)
 
+def finite_product(*values):
+    # Exponent-scaled multiplication avoids intermediate overflow AND underflow.
+    mantissa=1.0;exponent=0
+    for value in values:
+        if not math.isfinite(value):raise ValueError('finite factors required')
+        fraction,power=math.frexp(value);mantissa*=fraction;exponent+=power
+    try:result=math.ldexp(mantissa,exponent)
+    except OverflowError:raise ValueError('product must be representable') from None
+    if not math.isfinite(result):raise ValueError('product must be finite')
+    return result
+
 def simulate(resistance, compliance, inflow, dt, initial=80):
     if any(not math.isfinite(x) or x <= 0 for x in (resistance, compliance, dt)):
         raise ValueError('R, C and dt must be finite and positive')
@@ -44,7 +55,7 @@ def simulate(resistance, compliance, inflow, dt, initial=80):
     for flow in inflow:
         if not math.isfinite(flow):
             raise ValueError('inflow samples must be finite')
-        pressure = pressure*decay + resistance*flow*inflow_gain
+        pressure = pressure*decay + finite_product(resistance,flow,inflow_gain)
         if not math.isfinite(pressure):
             raise ValueError('pressure overflowed; use representable inputs')
         values.append(pressure)

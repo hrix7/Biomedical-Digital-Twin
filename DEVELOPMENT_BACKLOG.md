@@ -24,8 +24,12 @@ Independent forcing-step probe.
 
 Avoid intermediate flow-product overflow and underflow.
 
+## Completed — 2026-11-19
+
+Validate experiment configuration before simulation.
+
 ## Next priorities
 
-1. Quantify uncertainty without treating the finite grid as a confidence region.
+1. Quantify uncertainty without treating the finite loss grid as a confidence region.
 2. Evaluate model mismatch separately from same-model recovery.
-3. Add convergence checks for smoothly varying forcing.
+3. Add independent convergence checks for smoothly varying forcing.

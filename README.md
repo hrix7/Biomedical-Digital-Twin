@@ -73,3 +73,7 @@ Added a zero-to-constant inflow probe and an independently evaluated two-phase c
 ## Avoid intermediate flow-product overflow and underflow
 
 The exact update now evaluates R*Q*gain with exponent-scaled multiplication. Valid finite contributions survive intermediate overflow or underflow; truly unrepresentable outputs still fail. Independent extreme-magnitude tests cover both paths, signed/zero products and invalid factors. The idealized model and inference scope are unchanged.
+
+## Validate experiment configuration before simulation
+
+Added validation for a nonempty calibration/forward holdout, integer counts/seed, positive finite parameters/timestep, nonnegative noise, unique nonempty parameter grids and representable time constants/durations. Invalid settings fail before simulation. Tests use a simulation spy and exercise the smallest valid record and singleton calibration grid. No clinical validity or confidence-region interpretation is implied.

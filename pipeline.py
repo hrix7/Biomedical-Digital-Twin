@@ -95,7 +95,25 @@ def forcing_step_probe(resistance,compliance,dt,phase_samples=50):
     reference=[80*math.exp(-(i+1)*dt/tau) if i<phase_samples else 100*resistance+(middle-100*resistance)*math.exp(-((i+1)*dt-split)/tau) for i in range(2*phase_samples)]
     return dict(initial_pressure_mmHg=80,flow_before_mL_s=0,flow_after_mL_s=100,switch_time_seconds=split,phase_samples=phase_samples,max_abs_error_mmHg=max(abs(a-b) for a,b in zip(predicted,reference)),samples=[dict(time_seconds=(i+1)*dt,flow_mL_s=q,pressure_mmHg=p,closed_form_mmHg=r) for i,(q,p,r) in enumerate(zip(inflow,predicted,reference))],interpretation='Separate deterministic zero-to-constant-flow probe with an independent two-phase closed form; same ideal model, not physiological or patient validation.')
 
+def validate_config(config):
+    if not isinstance(config,dict):raise ValueError('configuration object required')
+    if type(config.get('seed')) is not int:raise ValueError('integer seed required')
+    if type(config.get('samples')) is not int or config['samples']<2 or type(config.get('calibration_samples')) is not int or not 1<=config['calibration_samples']<config['samples']:
+        raise ValueError('nonempty calibration and forward holdout required')
+    positive=lambda v:not isinstance(v,bool) and isinstance(v,(int,float)) and math.isfinite(v) and v>0
+    for key in ('dt_seconds','true_R','true_C','baseline_R','baseline_C'):
+        if not positive(config.get(key)):raise ValueError(key+' must be finite and positive')
+    noise=config.get('observation_noise_sd_mmHg')
+    if isinstance(noise,bool) or not isinstance(noise,(int,float)) or not math.isfinite(noise) or noise<0:raise ValueError('finite nonnegative observation noise required')
+    for key in ('resistance_grid','compliance_grid'):
+        grid=config.get(key)
+        if not isinstance(grid,list) or not grid or any(not positive(v) for v in grid) or len(set(grid))!=len(grid):raise ValueError('unique finite positive parameter grids required')
+    if not math.isfinite(config['samples']*config['dt_seconds']) or not math.isfinite(100*config['dt_seconds']):raise ValueError('representable experiment and probe durations required')
+    for r,c in [(config['true_R'],config['true_C']),(config['baseline_R'],config['baseline_C'])]+[(r,c) for r in config['resistance_grid'] for c in config['compliance_grid']]:
+        if not math.isfinite(r*c) or r*c<=0:raise ValueError('representable positive time constants required')
+
 def run(config):
+    validate_config(config)
     rng = random.Random(config['seed'])
     dt = config['dt_seconds']
     inflow = [max(0, 80 + 70*math.sin(2*math.pi*i*dt)) for i in range(config['samples'])]

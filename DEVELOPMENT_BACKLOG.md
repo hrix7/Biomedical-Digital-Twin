@@ -28,8 +28,12 @@ Avoid intermediate flow-product overflow and underflow.
 
 Validate experiment configuration before simulation.
 
+## Completed — 2026-11-20
+
+Continuous-ramp forcing convergence probe.
+
 ## Next priorities
 
-1. Quantify uncertainty without treating the finite loss grid as a confidence region.
+1. Quantify calibration uncertainty without treating the finite grid as a confidence region.
 2. Evaluate model mismatch separately from same-model recovery.
-3. Add independent convergence checks for smoothly varying forcing.
+3. Extend analytic probes with explicit numerical-domain limits.

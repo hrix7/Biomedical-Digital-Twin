@@ -52,3 +52,7 @@ The exact update now evaluates R*Q*gain with exponent-scaled multiplication. Val
 ## 2026-11-19 — Validate experiment configuration before simulation
 
 Added validation for a nonempty calibration/forward holdout, integer counts/seed, positive finite parameters/timestep, nonnegative noise, unique nonempty parameter grids and representable time constants/durations. Invalid settings fail before simulation. Tests use a simulation spy and exercise the smallest valid record and singleton calibration grid. No clinical validity or confidence-region interpretation is implied. Full suite: 26 tests passed; pipeline generation, independent --verify and diff checks passed before publication. No workflow or permission changes; workflow policy tests passed.
+
+## 2026-11-20 — Continuous-ramp forcing convergence probe
+
+Added an independent continuous-linear-inflow closed form and measured endpoint errors for left-endpoint piecewise-constant simulations at 25/50/100 steps over 2 s. Tests verify initial/decay limits, a separately rearranged analytic formula and observed first-order refinement. This is simplified same-model numerical validation, not physiological or clinical validation. Full suite: 29 tests passed; pipeline generation, independent --verify and diff checks passed before publication. Workflow policy tests passed without workflow/permission changes.

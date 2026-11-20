@@ -757,6 +757,35 @@ Generated from `config.json` by `pipeline.py`. Metrics are computed, never hand-
   "holdout_rmse_vs_observed_mmHg": 0.9798338973871291,
   "holdout_rmse_vs_synthetic_truth_mmHg": 0.0,
   "interpretation": "Synthetic parameter recovery within the same generating model; no patient-specific or clinical validation.",
+  "ramp_forcing_probe": {
+    "cases": [
+      {
+        "absolute_endpoint_error_mmHg": 0.9731171367997575,
+        "analytic_endpoint_mmHg": 70.96651292719498,
+        "dt_seconds": 0.08,
+        "endpoint_mmHg": 69.99339579039523,
+        "samples": 25
+      },
+      {
+        "absolute_endpoint_error_mmHg": 0.4847698527549511,
+        "analytic_endpoint_mmHg": 70.96651292719498,
+        "dt_seconds": 0.04,
+        "endpoint_mmHg": 70.48174307444003,
+        "samples": 50
+      },
+      {
+        "absolute_endpoint_error_mmHg": 0.24193772814383863,
+        "analytic_endpoint_mmHg": 70.96651292719498,
+        "dt_seconds": 0.02,
+        "endpoint_mmHg": 70.72457519905115,
+        "samples": 100
+      }
+    ],
+    "duration_seconds": 2,
+    "interpretation": "Separate linear-ramp forcing Q(t)=20+30t with independent continuous-forcing closed form. Left-endpoint piecewise-constant flow approximates this ramp; errors should converge with timestep refinement. This is same-model numerical validation, not patient/physiological validation or calibration uncertainty.",
+    "q0_mL_s": 20,
+    "slope_mL_s2": 30
+  },
   "sensitivity": {
     "R_multiplier_0.8": 19.074083575699877,
     "R_multiplier_1": 0.0,
@@ -766,4 +795,4 @@ Generated from `config.json` by `pipeline.py`. Metrics are computed, never hand-
 }
 ```
 
-Result SHA-256: `4c7a0a32f89f3d906449da8abe8bb1399765a9b37012b1f8d61ded247315ba49`
+Result SHA-256: `fdcf55b73df7f206b6f6ec944848adc56be3d46215ef3c9cd236a9d47222d469`

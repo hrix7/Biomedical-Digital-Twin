@@ -95,6 +95,25 @@ def forcing_step_probe(resistance,compliance,dt,phase_samples=50):
     reference=[80*math.exp(-(i+1)*dt/tau) if i<phase_samples else 100*resistance+(middle-100*resistance)*math.exp(-((i+1)*dt-split)/tau) for i in range(2*phase_samples)]
     return dict(initial_pressure_mmHg=80,flow_before_mL_s=0,flow_after_mL_s=100,switch_time_seconds=split,phase_samples=phase_samples,max_abs_error_mmHg=max(abs(a-b) for a,b in zip(predicted,reference)),samples=[dict(time_seconds=(i+1)*dt,flow_mL_s=q,pressure_mmHg=p,closed_form_mmHg=r) for i,(q,p,r) in enumerate(zip(inflow,predicted,reference))],interpretation='Separate deterministic zero-to-constant-flow probe with an independent two-phase closed form; same ideal model, not physiological or patient validation.')
 
+def ramp_pressure(time,resistance,compliance,initial=80,q0=20,slope=30):
+    simulate(resistance,compliance,[],1,initial)  # shared parameter contract only
+    if not math.isfinite(time) or time<0 or any(not math.isfinite(v) for v in (q0,slope)):
+        raise ValueError('finite nonnegative time and finite forcing required')
+    tau=resistance*compliance;gain=-math.expm1(-time/tau)
+    result=initial*math.exp(-time/tau)+resistance*(q0*gain+slope*(time-tau*gain))
+    if not math.isfinite(result):raise ValueError('representable analytic pressure required')
+    return result
+
+def ramp_forcing_probe(resistance,compliance,duration=2,resolutions=(25,50,100)):
+    if not math.isfinite(duration) or duration<=0 or not isinstance(resolutions,(tuple,list)) or not resolutions or any(type(n) is not int or n<1 for n in resolutions) or len(set(resolutions))!=len(resolutions):
+        raise ValueError('positive duration and unique positive sample counts required')
+    reference=ramp_pressure(duration,resistance,compliance);cases=[]
+    for count in resolutions:
+        dt=duration/count;flow=[20+30*i*dt for i in range(count)]
+        endpoint=simulate(resistance,compliance,flow,dt)[-1]
+        cases.append(dict(samples=count,dt_seconds=dt,endpoint_mmHg=endpoint,analytic_endpoint_mmHg=reference,absolute_endpoint_error_mmHg=abs(endpoint-reference)))
+    return dict(duration_seconds=duration,q0_mL_s=20,slope_mL_s2=30,cases=cases,interpretation='Separate linear-ramp forcing Q(t)=20+30t with independent continuous-forcing closed form. Left-endpoint piecewise-constant flow approximates this ramp; errors should converge with timestep refinement. This is same-model numerical validation, not patient/physiological validation or calibration uncertainty.')
+
 def validate_config(config):
     if not isinstance(config,dict):raise ValueError('configuration object required')
     if type(config.get('seed')) is not int:raise ValueError('integer seed required')
@@ -128,7 +147,7 @@ def run(config):
     rows = [['sample','time_seconds','flow_mL_per_second','clean_mmHg','observed_mmHg','estimated_mmHg','flow_interval_start_seconds']]
     rows.extend([i,format((i+1)*dt,'.12g'),format(q,'.12g'),format(p,'.12g'),format(o,'.12g'),format(e,'.12g'),format(i*dt,'.12g')]
                 for i,(q,p,o,e) in enumerate(zip(inflow,clean,observed,predicted)))
-    return rows, dict(forcing_step_probe=forcing_step_probe(config['true_R'],config['true_C'],dt),time_convention='time_seconds labels post-step pressure at (i+1)*dt; each flow value applies on [flow_interval_start_seconds, time_seconds). Initial pressure at t=0 is not an exported observation.',estimated_R=r,estimated_C=c,calibration_rmse_mmHg=loss,
+    return rows, dict(ramp_forcing_probe=ramp_forcing_probe(config['true_R'],config['true_C']),forcing_step_probe=forcing_step_probe(config['true_R'],config['true_C'],dt),time_convention='time_seconds labels post-step pressure at (i+1)*dt; each flow value applies on [flow_interval_start_seconds, time_seconds). Initial pressure at t=0 is not an exported observation.',estimated_R=r,estimated_C=c,calibration_rmse_mmHg=loss,
                       holdout_rmse_vs_observed_mmHg=rmse(predicted[cut:],observed[cut:]),
                       holdout_rmse_vs_synthetic_truth_mmHg=rmse(predicted[cut:],clean[cut:]),
                       baseline_holdout_rmse_mmHg=rmse(baseline[cut:],clean[cut:]),

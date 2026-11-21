@@ -100,7 +100,10 @@ def ramp_pressure(time,resistance,compliance,initial=80,q0=20,slope=30):
     if not math.isfinite(time) or time<0 or any(not math.isfinite(v) for v in (q0,slope)):
         raise ValueError('finite nonnegative time and finite forcing required')
     tau=resistance*compliance;gain=-math.expm1(-time/tau)
-    result=initial*math.exp(-time/tau)+resistance*(q0*gain+slope*(time-tau*gain))
+    x=time/tau
+    # Stable integral of ramp forcing: avoid subtracting nearly equal times.
+    lag=time-tau*gain if abs(x)>=1e-3 else time*x*(.5+x*(-1/6+x*(1/24+x*(-1/120+x/720))))
+    result=initial*math.exp(-x)+resistance*(q0*gain+slope*lag)
     if not math.isfinite(result):raise ValueError('representable analytic pressure required')
     return result
 

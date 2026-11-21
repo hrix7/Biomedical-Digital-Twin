@@ -56,3 +56,9 @@ Added validation for a nonempty calibration/forward holdout, integer counts/seed
 ## 2026-11-20 — Continuous-ramp forcing convergence probe
 
 Added an independent continuous-linear-inflow closed form and measured endpoint errors for left-endpoint piecewise-constant simulations at 25/50/100 steps over 2 s. Tests verify initial/decay limits, a separately rearranged analytic formula and observed first-order refinement. This is simplified same-model numerical validation, not physiological or clinical validation. Full suite: 29 tests passed; pipeline generation, independent --verify and diff checks passed before publication. Workflow policy tests passed without workflow/permission changes.
+
+## 2026-11-21 — Preserve tiny continuous-ramp response
+
+Replace cancellation-prone time minus tau times gain with a small-argument series below t/tau=0.001. Compare against a 70-digit Decimal analytic integral from 1e-12 through both sides of the switch, without relaxing existing convergence tests. Same-model numerical check, not physiological validation.
+
+Validation: full existing suite plus new tests (30 passed), pipeline generation and independent --verify, scoped diff review and git diff --check before publication. Hosted CI is followed after pushing. Existing read-only validation/publisher workflows unchanged; workflow-policy tests included.

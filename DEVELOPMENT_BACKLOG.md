@@ -37,3 +37,7 @@ Continuous-ramp forcing convergence probe.
 1. Quantify calibration uncertainty without treating the finite grid as a confidence region.
 2. Evaluate model mismatch separately from same-model recovery.
 3. Extend analytic probes with explicit numerical-domain limits.
+
+## Completed — 2026-11-21
+
+Preserve tiny continuous-ramp response.

@@ -138,6 +138,52 @@ Generated from `config.json` by `pipeline.py`. Metrics are computed, never hand-
       "rmse_mmHg": 27.272586433986394
     }
   ],
+  "calibration_profiles": {
+    "C": [
+      {
+        "minimum_rmse_mmHg": 3.424304175823109,
+        "value": 1
+      },
+      {
+        "minimum_rmse_mmHg": 1.7736525772409026,
+        "value": 1.25
+      },
+      {
+        "minimum_rmse_mmHg": 1.0474004766192089,
+        "value": 1.5
+      },
+      {
+        "minimum_rmse_mmHg": 1.4216915780279746,
+        "value": 1.75
+      },
+      {
+        "minimum_rmse_mmHg": 2.116316420067338,
+        "value": 2
+      }
+    ],
+    "R": [
+      {
+        "minimum_rmse_mmHg": 25.12156145309652,
+        "value": 0.8
+      },
+      {
+        "minimum_rmse_mmHg": 12.33248388966636,
+        "value": 1
+      },
+      {
+        "minimum_rmse_mmHg": 1.0474004766192089,
+        "value": 1.2
+      },
+      {
+        "minimum_rmse_mmHg": 8.98615655617239,
+        "value": 1.4
+      },
+      {
+        "minimum_rmse_mmHg": 17.44068402817939,
+        "value": 1.6
+      }
+    ]
+  },
   "calibration_rmse_mmHg": 1.0474004766192089,
   "calibration_runner_up_gap_mmHg": 0.37429110140876576,
   "estimated_C": 1.5,
@@ -760,22 +806,22 @@ Generated from `config.json` by `pipeline.py`. Metrics are computed, never hand-
   "ramp_forcing_probe": {
     "cases": [
       {
-        "absolute_endpoint_error_mmHg": 0.9731171367997717,
-        "analytic_endpoint_mmHg": 70.966512927195,
+        "absolute_endpoint_error_mmHg": 0.9731171367997575,
+        "analytic_endpoint_mmHg": 70.96651292719498,
         "dt_seconds": 0.08,
         "endpoint_mmHg": 69.99339579039523,
         "samples": 25
       },
       {
-        "absolute_endpoint_error_mmHg": 0.4847698527549653,
-        "analytic_endpoint_mmHg": 70.966512927195,
+        "absolute_endpoint_error_mmHg": 0.4847698527549511,
+        "analytic_endpoint_mmHg": 70.96651292719498,
         "dt_seconds": 0.04,
         "endpoint_mmHg": 70.48174307444003,
         "samples": 50
       },
       {
-        "absolute_endpoint_error_mmHg": 0.24193772814385284,
-        "analytic_endpoint_mmHg": 70.966512927195,
+        "absolute_endpoint_error_mmHg": 0.24193772814383863,
+        "analytic_endpoint_mmHg": 70.96651292719498,
         "dt_seconds": 0.02,
         "endpoint_mmHg": 70.72457519905115,
         "samples": 100
@@ -795,4 +841,4 @@ Generated from `config.json` by `pipeline.py`. Metrics are computed, never hand-
 }
 ```
 
-Result SHA-256: `fb09d178c115d73a058b696d1a7f1056fe0799c0f876b1b8f3b3a124c1df5f88`
+Result SHA-256: `0948212850f1dcac94f34d563c4c0337a800eae7522b0a70fd00f21c581e3b74`

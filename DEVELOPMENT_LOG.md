@@ -62,3 +62,9 @@ Added an independent continuous-linear-inflow closed form and measured endpoint 
 Replace cancellation-prone time minus tau times gain with a small-argument series below t/tau=0.001. Compare against a 70-digit Decimal analytic integral from 1e-12 through both sides of the switch, without relaxing existing convergence tests. Same-model numerical check, not physiological validation.
 
 Validation: full existing suite plus new tests (30 passed), pipeline generation and independent --verify, scoped diff review and git diff --check before publication. Hosted CI is followed after pushing. Existing read-only validation/publisher workflows unchanged; workflow-policy tests included.
+
+## 2026-11-24 — Discrete calibration loss profiles
+
+For each R and C grid value, report the minimum calibration RMSE over the other grid parameter. Preserve ties and grid limitations. Hand-grid and permutation/singleton tests independently verify minima. These are discrete nuisance-parameter loss summaries, not confidence intervals or proof of continuous identifiability. No holdout observations enter calibration.
+
+Validation before publication: 32 full-suite tests passed, pipeline regeneration and independent --verify passed, scoped diff/checksum review and git diff --check passed. Workflow policy tests included; workflows and permissions unchanged. Hosted validation followed after pushing.

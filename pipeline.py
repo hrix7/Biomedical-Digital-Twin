@@ -81,6 +81,10 @@ def calibration_grid(inflow, observed, config):
                   for r in config['resistance_grid'] for c in config['compliance_grid']]
     return sorted(candidates)
 
+def calibration_profiles(grid):
+    """Discrete nuisance-parameter minimization, not confidence intervals."""
+    return {key:[dict(value=v,minimum_rmse_mmHg=min(row[0] for row in grid if row[index]==v)) for v in sorted({row[index] for row in grid})] for key,index in [('R',1),('C',2)]}
+
 def calibrate(inflow, observed, config):
     return calibration_grid(inflow,observed,config)[0]
 
@@ -156,6 +160,7 @@ def run(config):
                       baseline_holdout_rmse_mmHg=rmse(baseline[cut:],clean[cut:]),
                       sensitivity=sensitivity,
                       calibration_grid=[dict(rmse_mmHg=e,R=rr,C=cc) for e,rr,cc in grid],
+                      calibration_profiles=calibration_profiles(grid),
                       calibration_runner_up_gap_mmHg=grid[1][0]-loss if len(grid)>1 else None,
                       calibration_best_on_grid_boundary=dict(R=r in (min(config['resistance_grid']),max(config['resistance_grid'])),C=c in (min(config['compliance_grid']),max(config['compliance_grid']))) ,
                       grid_interpretation='Calibration-only loss surface, not a confidence region or proof of identifiability; holdout values do not select parameters.',

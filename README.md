@@ -85,3 +85,7 @@ Added an independent continuous-linear-inflow closed form and measured endpoint 
 ### November 21 development
 
 Replace cancellation-prone time minus tau times gain with a small-argument series below t/tau=0.001. Compare against a 70-digit Decimal analytic integral from 1e-12 through both sides of the switch, without relaxing existing convergence tests. Same-model numerical check, not physiological validation.
+
+### November 24 development
+
+For each R and C grid value, report the minimum calibration RMSE over the other grid parameter. Preserve ties and grid limitations. Hand-grid and permutation/singleton tests independently verify minima. These are discrete nuisance-parameter loss summaries, not confidence intervals or proof of continuous identifiability. No holdout observations enter calibration.

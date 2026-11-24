@@ -41,3 +41,12 @@ Continuous-ramp forcing convergence probe.
 ## Completed — 2026-11-21
 
 Preserve tiny continuous-ramp response.
+
+## Completed — 2026-11-24
+
+Discrete calibration loss profiles.
+
+## Current ordered next steps
+
+1. Quantify calibration noise sensitivity with a declared conditional resampling protocol before confidence-region claims.
+2. Review public-data terms, exact release/checksums and subject mappings before ingestion; keep synthetic and public-data evaluation distinct.

@@ -806,22 +806,22 @@ Generated from `config.json` by `pipeline.py`. Metrics are computed, never hand-
   "ramp_forcing_probe": {
     "cases": [
       {
-        "absolute_endpoint_error_mmHg": 0.9731171367997575,
-        "analytic_endpoint_mmHg": 70.96651292719498,
+        "absolute_endpoint_error_mmHg": 0.9731171367997717,
+        "analytic_endpoint_mmHg": 70.966512927195,
         "dt_seconds": 0.08,
         "endpoint_mmHg": 69.99339579039523,
         "samples": 25
       },
       {
-        "absolute_endpoint_error_mmHg": 0.4847698527549511,
-        "analytic_endpoint_mmHg": 70.96651292719498,
+        "absolute_endpoint_error_mmHg": 0.4847698527549653,
+        "analytic_endpoint_mmHg": 70.966512927195,
         "dt_seconds": 0.04,
         "endpoint_mmHg": 70.48174307444003,
         "samples": 50
       },
       {
-        "absolute_endpoint_error_mmHg": 0.24193772814383863,
-        "analytic_endpoint_mmHg": 70.96651292719498,
+        "absolute_endpoint_error_mmHg": 0.24193772814385284,
+        "analytic_endpoint_mmHg": 70.966512927195,
         "dt_seconds": 0.02,
         "endpoint_mmHg": 70.72457519905115,
         "samples": 100
@@ -841,4 +841,4 @@ Generated from `config.json` by `pipeline.py`. Metrics are computed, never hand-
 }
 ```
 
-Result SHA-256: `0948212850f1dcac94f34d563c4c0337a800eae7522b0a70fd00f21c581e3b74`
+Result SHA-256: `b7b43667404efd63280c87a46f4dd6a6152a9ec956eedf9af6e43e28d0fa3b9e`

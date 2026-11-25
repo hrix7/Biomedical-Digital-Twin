@@ -50,3 +50,12 @@ Discrete calibration loss profiles.
 
 1. Quantify calibration noise sensitivity with a declared conditional resampling protocol before confidence-region claims.
 2. Review public-data terms, exact release/checksums and subject mappings before ingestion; keep synthetic and public-data evaluation distinct.
+
+## Completed — 2026-11-25
+
+Calibration observation-bias sensitivity.
+
+## Current next steps
+
+1. Review a conditional noise-resampling protocol and residual assumptions before statistical uncertainty claims.
+2. Review real-data license/version/checksums and subject mappings before ingestion.

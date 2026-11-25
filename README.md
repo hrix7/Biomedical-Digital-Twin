@@ -89,3 +89,7 @@ Replace cancellation-prone time minus tau times gain with a small-argument serie
 ### November 24 development
 
 For each R and C grid value, report the minimum calibration RMSE over the other grid parameter. Preserve ties and grid limitations. Hand-grid and permutation/singleton tests independently verify minima. These are discrete nuisance-parameter loss summaries, not confidence intervals or proof of continuous identifiability. No holdout observations enter calibration.
+
+### November 25 development
+
+Refit the same finite grid after additive -1, 0 and +1 mmHg offsets on calibration observations only. Report selected parameters/loss for each offset. Independent hand-grid and invalid-observation tests verify behavior. This is deterministic systematic-bias sensitivity, not a bootstrap confidence region, sensor validation or patient uncertainty.

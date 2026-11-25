@@ -11,6 +11,29 @@ Generated from `config.json` by `pipeline.py`. Metrics are computed, never hand-
     "C": false,
     "R": false
   },
+  "calibration_bias_probe": {
+    "cases": [
+      {
+        "calibration_rmse_mmHg": 1.3560125505983607,
+        "estimated_C": 1.75,
+        "estimated_R": 1.2,
+        "offset_mmHg": -1.0
+      },
+      {
+        "calibration_rmse_mmHg": 1.0474004766192089,
+        "estimated_C": 1.5,
+        "estimated_R": 1.2,
+        "offset_mmHg": 0.0
+      },
+      {
+        "calibration_rmse_mmHg": 1.375363954318434,
+        "estimated_C": 1.5,
+        "estimated_R": 1.2,
+        "offset_mmHg": 1.0
+      }
+    ],
+    "method": "Predeclared additive calibration-observation offsets -1, 0, +1 mmHg; refit the same finite grid using calibration inputs only. A systematic-bias sensitivity probe, not bootstrap uncertainty, a confidence region or patient sensor validation. Holdout observations do not select parameters."
+  },
   "calibration_grid": [
     {
       "C": 1.5,
@@ -806,22 +829,22 @@ Generated from `config.json` by `pipeline.py`. Metrics are computed, never hand-
   "ramp_forcing_probe": {
     "cases": [
       {
-        "absolute_endpoint_error_mmHg": 0.9731171367997717,
-        "analytic_endpoint_mmHg": 70.966512927195,
+        "absolute_endpoint_error_mmHg": 0.9731171367997575,
+        "analytic_endpoint_mmHg": 70.96651292719498,
         "dt_seconds": 0.08,
         "endpoint_mmHg": 69.99339579039523,
         "samples": 25
       },
       {
-        "absolute_endpoint_error_mmHg": 0.4847698527549653,
-        "analytic_endpoint_mmHg": 70.966512927195,
+        "absolute_endpoint_error_mmHg": 0.4847698527549511,
+        "analytic_endpoint_mmHg": 70.96651292719498,
         "dt_seconds": 0.04,
         "endpoint_mmHg": 70.48174307444003,
         "samples": 50
       },
       {
-        "absolute_endpoint_error_mmHg": 0.24193772814385284,
-        "analytic_endpoint_mmHg": 70.966512927195,
+        "absolute_endpoint_error_mmHg": 0.24193772814383863,
+        "analytic_endpoint_mmHg": 70.96651292719498,
         "dt_seconds": 0.02,
         "endpoint_mmHg": 70.72457519905115,
         "samples": 100
@@ -841,4 +864,4 @@ Generated from `config.json` by `pipeline.py`. Metrics are computed, never hand-
 }
 ```
 
-Result SHA-256: `b7b43667404efd63280c87a46f4dd6a6152a9ec956eedf9af6e43e28d0fa3b9e`
+Result SHA-256: `e6450a77e00f1f275da881ca1dc27b48d633bffe35ba671a296f842f210c1fb0`

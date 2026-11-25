@@ -33,6 +33,29 @@
       "C": false,
       "R": false
     },
+    "calibration_bias_probe": {
+      "cases": [
+        {
+          "calibration_rmse_mmHg": 1.3560125505983607,
+          "estimated_C": 1.75,
+          "estimated_R": 1.2,
+          "offset_mmHg": -1.0
+        },
+        {
+          "calibration_rmse_mmHg": 1.0474004766192089,
+          "estimated_C": 1.5,
+          "estimated_R": 1.2,
+          "offset_mmHg": 0.0
+        },
+        {
+          "calibration_rmse_mmHg": 1.375363954318434,
+          "estimated_C": 1.5,
+          "estimated_R": 1.2,
+          "offset_mmHg": 1.0
+        }
+      ],
+      "method": "Predeclared additive calibration-observation offsets -1, 0, +1 mmHg; refit the same finite grid using calibration inputs only. A systematic-bias sensitivity probe, not bootstrap uncertainty, a confidence region or patient sensor validation. Holdout observations do not select parameters."
+    },
     "calibration_grid": [
       {
         "C": 1.5,
@@ -828,22 +851,22 @@
     "ramp_forcing_probe": {
       "cases": [
         {
-          "absolute_endpoint_error_mmHg": 0.9731171367997717,
-          "analytic_endpoint_mmHg": 70.966512927195,
+          "absolute_endpoint_error_mmHg": 0.9731171367997575,
+          "analytic_endpoint_mmHg": 70.96651292719498,
           "dt_seconds": 0.08,
           "endpoint_mmHg": 69.99339579039523,
           "samples": 25
         },
         {
-          "absolute_endpoint_error_mmHg": 0.4847698527549653,
-          "analytic_endpoint_mmHg": 70.966512927195,
+          "absolute_endpoint_error_mmHg": 0.4847698527549511,
+          "analytic_endpoint_mmHg": 70.96651292719498,
           "dt_seconds": 0.04,
           "endpoint_mmHg": 70.48174307444003,
           "samples": 50
         },
         {
-          "absolute_endpoint_error_mmHg": 0.24193772814385284,
-          "analytic_endpoint_mmHg": 70.966512927195,
+          "absolute_endpoint_error_mmHg": 0.24193772814383863,
+          "analytic_endpoint_mmHg": 70.96651292719498,
           "dt_seconds": 0.02,
           "endpoint_mmHg": 70.72457519905115,
           "samples": 100
@@ -863,5 +886,5 @@
   },
   "project": "Biomedical-Digital-Twin",
   "schema_version": 1,
-  "source_sha256": "25f2be8e359793b5ee4f683eaf75429ce5d6d92ec563f248e31ba58b05eafe92"
+  "source_sha256": "fa109edef0fe22b1b5f4b1d45bb34dd9b343deffb2addaa60389b14f0b367074"
 }

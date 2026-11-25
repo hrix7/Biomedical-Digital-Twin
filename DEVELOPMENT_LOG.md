@@ -68,3 +68,9 @@ Validation: full existing suite plus new tests (30 passed), pipeline generation 
 For each R and C grid value, report the minimum calibration RMSE over the other grid parameter. Preserve ties and grid limitations. Hand-grid and permutation/singleton tests independently verify minima. These are discrete nuisance-parameter loss summaries, not confidence intervals or proof of continuous identifiability. No holdout observations enter calibration.
 
 Validation before publication: 32 full-suite tests passed, pipeline regeneration and independent --verify passed, scoped diff/checksum review and git diff --check passed. Workflow policy tests included; workflows and permissions unchanged. Hosted validation followed after pushing.
+
+## 2026-11-25 — Calibration observation-bias sensitivity
+
+Refit the same finite grid after additive -1, 0 and +1 mmHg offsets on calibration observations only. Report selected parameters/loss for each offset. Independent hand-grid and invalid-observation tests verify behavior. This is deterministic systematic-bias sensitivity, not a bootstrap confidence region, sensor validation or patient uncertainty.
+
+Pre-publication validation: 34 full-suite tests passed; pipeline generation and independent --verify, scoped diff and checksum review, git diff --check passed. Existing workflow policy tests included; no permission/workflow changes. Hosted CI followed after publication.

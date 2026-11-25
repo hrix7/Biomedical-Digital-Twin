@@ -85,6 +85,13 @@ def calibration_profiles(grid):
     """Discrete nuisance-parameter minimization, not confidence intervals."""
     return {key:[dict(value=v,minimum_rmse_mmHg=min(row[0] for row in grid if row[index]==v)) for v in sorted({row[index] for row in grid})] for key,index in [('R',1),('C',2)]}
 
+def calibration_bias_probe(inflow,observed,config):
+    cases=[]
+    for bias in (-1.0,0.0,1.0):
+        loss,r,c=calibration_grid(inflow,[v+bias for v in observed],config)[0]
+        cases.append(dict(offset_mmHg=bias,estimated_R=r,estimated_C=c,calibration_rmse_mmHg=loss))
+    return dict(cases=cases,method='Predeclared additive calibration-observation offsets -1, 0, +1 mmHg; refit the same finite grid using calibration inputs only. A systematic-bias sensitivity probe, not bootstrap uncertainty, a confidence region or patient sensor validation. Holdout observations do not select parameters.')
+
 def calibrate(inflow, observed, config):
     return calibration_grid(inflow,observed,config)[0]
 
@@ -161,6 +168,7 @@ def run(config):
                       sensitivity=sensitivity,
                       calibration_grid=[dict(rmse_mmHg=e,R=rr,C=cc) for e,rr,cc in grid],
                       calibration_profiles=calibration_profiles(grid),
+                      calibration_bias_probe=calibration_bias_probe(inflow[:cut],observed[:cut],config),
                       calibration_runner_up_gap_mmHg=grid[1][0]-loss if len(grid)>1 else None,
                       calibration_best_on_grid_boundary=dict(R=r in (min(config['resistance_grid']),max(config['resistance_grid'])),C=c in (min(config['compliance_grid']),max(config['compliance_grid']))) ,
                       grid_interpretation='Calibration-only loss surface, not a confidence region or proof of identifiability; holdout values do not select parameters.',

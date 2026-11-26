@@ -83,6 +83,10 @@ def calibration_grid(inflow, observed, config):
 
 def calibration_profiles(grid):
     """Discrete nuisance-parameter minimization, not confidence intervals."""
+    numeric=lambda v:not isinstance(v,bool) and isinstance(v,(int,float)) and math.isfinite(v)
+    if not isinstance(grid,(list,tuple)) or not grid or any(not isinstance(row,(list,tuple)) or len(row)!=3 or not all(numeric(v) for v in row) or row[0]<0 or row[1]<=0 or row[2]<=0 for row in grid):
+        raise ValueError('nonempty finite loss/R/C grid with nonnegative loss and positive parameters required')
+    if len({(row[1],row[2]) for row in grid})!=len(grid):raise ValueError('unique parameter pairs required')
     return {key:[dict(value=v,minimum_rmse_mmHg=min(row[0] for row in grid if row[index]==v)) for v in sorted({row[index] for row in grid})] for key,index in [('R',1),('C',2)]}
 
 def calibration_bias_probe(inflow,observed,config):

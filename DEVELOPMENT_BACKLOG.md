@@ -59,3 +59,12 @@ Calibration observation-bias sensitivity.
 
 1. Review a conditional noise-resampling protocol and residual assumptions before statistical uncertainty claims.
 2. Review real-data license/version/checksums and subject mappings before ingestion.
+
+## Completed — 2026-11-26
+
+Validate discrete profile inputs.
+
+## Current ordered next steps
+
+1. Review a conditional noise-resampling protocol and residual assumptions before statistical uncertainty claims.
+2. Review official data terms/version/checksums and subject mapping before any real-data ingestion.

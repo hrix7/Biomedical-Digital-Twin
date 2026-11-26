@@ -74,3 +74,9 @@ Validation before publication: 32 full-suite tests passed, pipeline regeneration
 Refit the same finite grid after additive -1, 0 and +1 mmHg offsets on calibration observations only. Report selected parameters/loss for each offset. Independent hand-grid and invalid-observation tests verify behavior. This is deterministic systematic-bias sensitivity, not a bootstrap confidence region, sensor validation or patient uncertainty.
 
 Pre-publication validation: 34 full-suite tests passed; pipeline generation and independent --verify, scoped diff and checksum review, git diff --check passed. Existing workflow policy tests included; no permission/workflow changes. Hosted CI followed after publication.
+
+## 2026-11-26 — Validate discrete profile inputs
+
+Require a nonempty finite loss/R/C grid, nonnegative loss, positive parameters and unique parameter pairs before forming loss profiles. Reject NaN/Infinity, invalid shapes and ambiguous duplicate pairs. Hand-grid and zero-loss/permutation cases retain valid behavior. No confidence-region or clinical claim.
+
+Pre-publication: 36 full-suite tests passed, regeneration and independent --verify, scoped diff/checksum review and git diff --check passed. Workflow policy tests included; no permission/workflow changes. Hosted validation followed after push.

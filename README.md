@@ -93,3 +93,7 @@ For each R and C grid value, report the minimum calibration RMSE over the other 
 ### November 25 development
 
 Refit the same finite grid after additive -1, 0 and +1 mmHg offsets on calibration observations only. Report selected parameters/loss for each offset. Independent hand-grid and invalid-observation tests verify behavior. This is deterministic systematic-bias sensitivity, not a bootstrap confidence region, sensor validation or patient uncertainty.
+
+### November 26 development
+
+Require a nonempty finite loss/R/C grid, nonnegative loss, positive parameters and unique parameter pairs before forming loss profiles. Reject NaN/Infinity, invalid shapes and ambiguous duplicate pairs. Hand-grid and zero-loss/permutation cases retain valid behavior. No confidence-region or clinical claim.

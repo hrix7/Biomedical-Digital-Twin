@@ -229,6 +229,13 @@
         }
       ]
     },
+    "calibration_residual_diagnostics": {
+      "centered_lag1_ratio": -0.06428369095509595,
+      "mean_observed_minus_predicted_mmHg": -0.1027108757918534,
+      "method": "Calibration observations only, after fitting. Lag-1 adjacent centered products divided by total centered sum of squares; null for constant residuals. Descriptive diagnostic, not an independence/normality test or permission to bootstrap; no holdout fitting or statistical uncertainty claim.",
+      "rmse_mmHg": 1.0474004766192089,
+      "samples": 300
+    },
     "calibration_rmse_mmHg": 1.0474004766192089,
     "calibration_runner_up_gap_mmHg": 0.37429110140876576,
     "estimated_C": 1.5,
@@ -851,22 +858,22 @@
     "ramp_forcing_probe": {
       "cases": [
         {
-          "absolute_endpoint_error_mmHg": 0.9731171367997717,
-          "analytic_endpoint_mmHg": 70.966512927195,
+          "absolute_endpoint_error_mmHg": 0.9731171367997575,
+          "analytic_endpoint_mmHg": 70.96651292719498,
           "dt_seconds": 0.08,
           "endpoint_mmHg": 69.99339579039523,
           "samples": 25
         },
         {
-          "absolute_endpoint_error_mmHg": 0.4847698527549653,
-          "analytic_endpoint_mmHg": 70.966512927195,
+          "absolute_endpoint_error_mmHg": 0.4847698527549511,
+          "analytic_endpoint_mmHg": 70.96651292719498,
           "dt_seconds": 0.04,
           "endpoint_mmHg": 70.48174307444003,
           "samples": 50
         },
         {
-          "absolute_endpoint_error_mmHg": 0.24193772814385284,
-          "analytic_endpoint_mmHg": 70.966512927195,
+          "absolute_endpoint_error_mmHg": 0.24193772814383863,
+          "analytic_endpoint_mmHg": 70.96651292719498,
           "dt_seconds": 0.02,
           "endpoint_mmHg": 70.72457519905115,
           "samples": 100
@@ -886,5 +893,5 @@
   },
   "project": "Biomedical-Digital-Twin",
   "schema_version": 1,
-  "source_sha256": "99fd0793c3d2eb661ac02113192fe329762f47c1fe740902f52b376145e4dbed"
+  "source_sha256": "c7c25afa1e268cfc692bf5ea51e475e8bc4032908263aa797ae4ca049014b535"
 }

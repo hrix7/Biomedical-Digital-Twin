@@ -89,6 +89,23 @@ def calibration_profiles(grid):
     if len({(row[1],row[2]) for row in grid})!=len(grid):raise ValueError('unique parameter pairs required')
     return {key:[dict(value=v,minimum_rmse_mmHg=min(row[0] for row in grid if row[index]==v)) for v in sorted({row[index] for row in grid})] for key,index in [('R',1),('C',2)]}
 
+def calibration_residuals(observed,predicted):
+    if len(observed)!=len(predicted) or not observed:
+        raise ValueError('equal nonempty residual vectors required')
+    if any(isinstance(v,bool) or not isinstance(v,(int,float)) or not math.isfinite(v) for v in list(observed)+list(predicted)):
+        raise ValueError('finite numeric residual inputs required')
+    errors=[a-b for a,b in zip(observed,predicted)]
+    if any(not math.isfinite(v) for v in errors):raise ValueError('representable residual differences required')
+    scale=max(abs(v) for v in errors)
+    normalized=[v/scale for v in errors] if scale else [0.0]*len(errors)
+    center=mean(normalized);deviations=[v-center for v in normalized]
+    denominator=sum(v*v for v in deviations)
+    lag1=sum(a*b for a,b in zip(deviations,deviations[1:]))/denominator if denominator else None
+    return dict(samples=len(errors),mean_observed_minus_predicted_mmHg=scale*center,
+                rmse_mmHg=rmse(observed,predicted),centered_lag1_ratio=lag1,
+                method='Calibration observations only, after fitting. Lag-1 adjacent centered products divided by total centered sum of squares; null for constant residuals. Descriptive diagnostic, not an independence/normality test or permission to bootstrap; no holdout fitting or statistical uncertainty claim.')
+
+
 def calibration_bias_probe(inflow,observed,config):
     cases=[]
     for bias in (-1.0,0.0,1.0):
@@ -172,6 +189,7 @@ def run(config):
                       sensitivity=sensitivity,
                       calibration_grid=[dict(rmse_mmHg=e,R=rr,C=cc) for e,rr,cc in grid],
                       calibration_profiles=calibration_profiles(grid),
+                      calibration_residual_diagnostics=calibration_residuals(observed[:cut],predicted[:cut]),
                       calibration_bias_probe=calibration_bias_probe(inflow[:cut],observed[:cut],config),
                       calibration_runner_up_gap_mmHg=grid[1][0]-loss if len(grid)>1 else None,
                       calibration_best_on_grid_boundary=dict(R=r in (min(config['resistance_grid']),max(config['resistance_grid'])),C=c in (min(config['compliance_grid']),max(config['compliance_grid']))) ,

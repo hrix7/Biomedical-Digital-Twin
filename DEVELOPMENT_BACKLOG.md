@@ -68,3 +68,13 @@ Validate discrete profile inputs.
 
 1. Review a conditional noise-resampling protocol and residual assumptions before statistical uncertainty claims.
 2. Review official data terms/version/checksums and subject mapping before any real-data ingestion.
+
+
+## Completed — 2026-11-28
+
+Calibration residual diagnostics. Calibration-only observed-minus-predicted mean, RMSE and centered lag-1 ratio; stable scaled computation and explicit constant-residual null. This exposes assumptions before resampling; no normality/independence test, confidence interval or holdout fitting.
+
+## Next ordered work
+
+1. Review these conditional diagnostics before expanding experiments; keep descriptive scenarios separate from statistical uncertainty.
+2. Review exact public release/terms/checksums and participant mapping before real-data integration.

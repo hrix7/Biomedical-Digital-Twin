@@ -207,6 +207,13 @@ Generated from `config.json` by `pipeline.py`. Metrics are computed, never hand-
       }
     ]
   },
+  "calibration_residual_diagnostics": {
+    "centered_lag1_ratio": -0.06428369095509595,
+    "mean_observed_minus_predicted_mmHg": -0.1027108757918534,
+    "method": "Calibration observations only, after fitting. Lag-1 adjacent centered products divided by total centered sum of squares; null for constant residuals. Descriptive diagnostic, not an independence/normality test or permission to bootstrap; no holdout fitting or statistical uncertainty claim.",
+    "rmse_mmHg": 1.0474004766192089,
+    "samples": 300
+  },
   "calibration_rmse_mmHg": 1.0474004766192089,
   "calibration_runner_up_gap_mmHg": 0.37429110140876576,
   "estimated_C": 1.5,
@@ -829,22 +836,22 @@ Generated from `config.json` by `pipeline.py`. Metrics are computed, never hand-
   "ramp_forcing_probe": {
     "cases": [
       {
-        "absolute_endpoint_error_mmHg": 0.9731171367997717,
-        "analytic_endpoint_mmHg": 70.966512927195,
+        "absolute_endpoint_error_mmHg": 0.9731171367997575,
+        "analytic_endpoint_mmHg": 70.96651292719498,
         "dt_seconds": 0.08,
         "endpoint_mmHg": 69.99339579039523,
         "samples": 25
       },
       {
-        "absolute_endpoint_error_mmHg": 0.4847698527549653,
-        "analytic_endpoint_mmHg": 70.966512927195,
+        "absolute_endpoint_error_mmHg": 0.4847698527549511,
+        "analytic_endpoint_mmHg": 70.96651292719498,
         "dt_seconds": 0.04,
         "endpoint_mmHg": 70.48174307444003,
         "samples": 50
       },
       {
-        "absolute_endpoint_error_mmHg": 0.24193772814385284,
-        "analytic_endpoint_mmHg": 70.966512927195,
+        "absolute_endpoint_error_mmHg": 0.24193772814383863,
+        "analytic_endpoint_mmHg": 70.96651292719498,
         "dt_seconds": 0.02,
         "endpoint_mmHg": 70.72457519905115,
         "samples": 100
@@ -864,4 +871,4 @@ Generated from `config.json` by `pipeline.py`. Metrics are computed, never hand-
 }
 ```
 
-Result SHA-256: `50b3cfaf361ad972b93b4b1d0379c18937de49bb5d46b8f179531d7b5f86d9ad`
+Result SHA-256: `f62f516fbe5be1d13ce855241886ada51322e41beff00ff2f9d7bd9e5b31817c`

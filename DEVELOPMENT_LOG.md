@@ -80,3 +80,10 @@ Pre-publication validation: 34 full-suite tests passed; pipeline generation and 
 Require a nonempty finite loss/R/C grid, nonnegative loss, positive parameters and unique parameter pairs before forming loss profiles. Reject NaN/Infinity, invalid shapes and ambiguous duplicate pairs. Hand-grid and zero-loss/permutation cases retain valid behavior. No confidence-region or clinical claim.
 
 Pre-publication: 36 full-suite tests passed, regeneration and independent --verify, scoped diff/checksum review and git diff --check passed. Workflow policy tests included; no permission/workflow changes. Hosted validation followed after push.
+
+
+## 2026-11-28 — Calibration residual diagnostics
+
+Calibration-only observed-minus-predicted mean, RMSE and centered lag-1 ratio; stable scaled computation and explicit constant-residual null. This exposes assumptions before resampling; no normality/independence test, confidence interval or holdout fitting. Added independent boundary/oracle tests. Full-suite and regenerated artifact checks are required before publication; actual counts and hosted checks are reported in the portfolio development log.
+
+Pre-push evidence: 39 full-suite tests passed; pipeline generation and independent --verify passed; git diff --check passed. Generated primary data bytes remain unchanged. No clinical or population validation.
